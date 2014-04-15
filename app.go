@@ -31,26 +31,25 @@ func main() {
 	})
 
 	m.Get("/languages", func(r render.Render, db *sql.DB) {
-		rows, err := db.Query("select name, creator FROM languages")
-		defer rows.Close()
+		languages, err := fetchLanguages(db)
 
 		if err != nil {
 			r.HTML(500, "error", err)
+		} else {
+			r.HTML(200, "languages", languages)
 		}
-
-		languages, err := mapRowsToLanguages(rows)
-
-		if err != nil {
-			r.HTML(500, "error", err)
-		}
-
-		r.HTML(200, "languages", languages)
 	})
 
 	m.Run()
 }
 
-func mapRowsToLanguages(rs *sql.Rows) (languages []*Language, err error) {
+func fetchLanguages(db *sql.DB) (languages []*Language, err error) {
+	rs, err := db.Query("select name, creator FROM languages")
+	if err != nil {
+		return nil, err
+	}
+	defer rs.Close()
+
 	languages = make([]*Language, 0)
 
 	for rs.Next() {
@@ -83,7 +82,7 @@ func initDB() *sql.DB {
 		panic(err.Error())
 	}
 
-	db.SetMaxOpenConns(4)
+	db.SetMaxOpenConns(4) // for ClearDB free plan
 
 	err = db.Ping()
 	if err != nil {
