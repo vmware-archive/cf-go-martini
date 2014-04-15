@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Languages</title>
+  </head>
+  <body>
+    <table>
+      <thead>
+        <th>Language</th>
+        <th>Creator</th>
+      </thead>
+      <tbody>
+        {{ range . }}
+        <tr>
+          <td>{{ .Name }}</td>
+          <td>{{ .Creator }}</td>
+        </tr>
+        {{ end }}
+      </tbody>
+    </table>
+  </body>
+</html>

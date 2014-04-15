@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CF Environment</title>
+  </head>
+  <body>
+    <h1>CF Environment</h1>
+    <ul>
+      <li><strong>ID: </strong> {{.ID}}</li>
+      <li><strong>Index: </strong> {{.Index}}</li>
+      <li><strong>Name: </strong> {{.Name}}</li>
+      <li><strong>Host: </strong> {{.Host}}</li>
+      <li><strong>Port: </strong> {{.Port}}</li>
+    </ul>
+    <h2>Services:</h2>
+    <table>
+      <thead>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Label</th>
+        <th>Plan</th>
+      </thead>
+      <tbody>
+        {{range $k, $v := .Services}}
+        {{range $service := $v}}
+        <tr>
+          <td>{{$k}}</td>
+          <td>{{$service.Name}}</td>
+          <td>{{$service.Label}}</td>
+          <td>{{$service.Plan}}</td>
+        </tr>
+        {{ end }}
+        {{ end }}
+      </tbody>
+    </table>
+  </body>
+</html>
