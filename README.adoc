@@ -5,6 +5,7 @@ A basic sample application that demonstrates a few things:
 * Writing a http://golang.org[Go] application for Cloud Foundry
 * Using the http://martini.codegangsta.io/[Martini] web framework
 * Using the https://github.com/joefitzgerald/cfenv[cfenv] Go library for interacting with CF application metadata and bound services
+* Use of http://golang.org/pkg/database/sql/[database/sql] to interact with a MySQL DB
 * Use of the experimental https://github.com/michaljemala/cloudfoundry-buildpack-go[Cloud Foundry Go Buildpack]
 
 == Running on Cloud Foundry
