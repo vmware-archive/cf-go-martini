@@ -88,6 +88,11 @@ func initDB() *sql.DB {
 	if err != nil {
 		panic(err.Error())
 	}
+
+	if schemaIsNotCreated(db) {
+		createSchema(db)
+	}
+
 	return db
 }
 
@@ -109,6 +114,48 @@ func dsn() string {
 		credentials["password"],
 		credentials["hostname"],
 		credentials["name"])
+}
+
+func schemaIsNotCreated(db *sql.DB) bool {
+	rs, err := db.Query("select * from languages limit 1")
+	if err != nil {
+		return true
+	} else {
+		rs.Close()
+		return false
+	}
+}
+
+func createSchema(db *sql.DB) {
+	_, err := db.Exec(
+		"CREATE TABLE languages (name varchar(45) NOT NULL, creator varchar(45) NOT NULL, PRIMARY KEY (name)) ENGINE=InnoDB DEFAULT CHARSET=utf8")
+
+	if err != nil {
+		panic(err.Error())
+	}
+
+	tx, err := db.Begin()
+	if err != nil {
+		panic(err.Error())
+	}
+
+	insertRow(db, "INSERT INTO languages (name, creator) VALUES ('Go','Rob')")
+	insertRow(db, "INSERT INTO languages (name, creator) VALUES ('Java','James')")
+	insertRow(db, "INSERT INTO languages (name, creator) VALUES ('Clojure','Rich')")
+	insertRow(db, "INSERT INTO languages (name, creator) VALUES ('Ruby','Matz')")
+	insertRow(db, "INSERT INTO languages (name, creator) VALUES ('Python','Guido')")
+
+	err = tx.Commit()
+	if err != nil {
+		panic(err.Error())
+	}
+}
+
+func insertRow(db *sql.DB, query string) {
+	_, err := db.Exec(query)
+	if err != nil {
+		panic(err.Error())
+	}
 }
 
 func contains(s []string, e string) bool {
