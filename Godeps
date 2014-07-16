@@ -1,9 +1,6 @@
 {
 	"ImportPath": "github.com/mstine/cf-go-martini",
 	"GoVersion": "go1.2.1",
-	"Packages": [
-		"./..."
-	],
 	"Deps": [
 		{
 			"ImportPath": "github.com/codegangsta/inject",
@@ -20,17 +17,17 @@
 			"Rev": "9a7aa3606b82e2081a13a008ada88dfdb96c20fd"
 		},
 		{
+			"ImportPath": "github.com/joefitzgerald/cfenv",
+			"Comment": "v1.2-4-g75a451b",
+			"Rev": "75a451b4acca891d2385ba6599d7ca4d3d376f23"
+		},
+		{
 			"ImportPath": "github.com/martini-contrib/render",
 			"Rev": "7b617783357fec5b5a6d4ecac82e747e4a14d1b5"
 		},
 		{
 			"ImportPath": "github.com/mitchellh/mapstructure",
 			"Rev": "57bb2fa7a7e00b26c80e4c4b0d4f15a210d94039"
-		},
-		{
-			"ImportPath": "github.com/mstine/cfenv",
-			"Comment": "v1.2-4-gbfece68",
-			"Rev": "bfece680f158bff0ad0ea791d3bb57ae0886868c"
 		}
 	]
 }
