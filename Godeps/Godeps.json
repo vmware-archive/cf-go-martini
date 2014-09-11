@@ -1,5 +1,5 @@
 {
-	"ImportPath": "github.com/mstine/cf-go-martini",
+	"ImportPath": "github.com/cf-platform-eng/cf-go-martini",
 	"GoVersion": "go1.2.1",
 	"Deps": [
 		{
