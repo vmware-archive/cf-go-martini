@@ -1,1 +1,1 @@
-web: martini
+web: cf-go-martini

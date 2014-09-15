@@ -3,6 +3,6 @@ applications:
 - name: cf-go-martini
   memory: 512M
   instances: 1
-  buildpack: https://github.com/michaljemala/cloudfoundry-buildpack-go
+  buildpack: https://github.com/cloudfoundry/go-buildpack.git
   services:
     - martini-db
