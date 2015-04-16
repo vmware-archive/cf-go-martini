@@ -6,8 +6,8 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 
+	"github.com/cloudfoundry-community/go-cfenv"
 	"github.com/go-martini/martini"
-	"github.com/joefitzgerald/cfenv"
 	"github.com/martini-contrib/render"
 )
 
@@ -25,7 +25,7 @@ func main() {
 	m.Use(render.Renderer())
 
 	m.Get("/", func(r render.Render) {
-		appEnv := cfenv.Current()
+		appEnv, _ := cfenv.Current()
 
 		r.HTML(200, "hello", appEnv)
 	})
@@ -97,7 +97,8 @@ func initDB() *sql.DB {
 }
 
 func dsn() string {
-	services := cfenv.Current().Services
+	appEnv, _ := cfenv.Current()
+	services := appEnv.Services
 	var mysqlService cfenv.Service
 
 	for _, instances := range services {
